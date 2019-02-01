@@ -1,0 +1,225 @@
+@font-face {
+    font-family: 'Fjalla One';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Fjalla One'), local('FjallaOne-Regular'), url(https://fonts.gstatic.com/s/fjallaone/v5/SHXJdWnWW6HDq-6DpcG8PyEAvth_LlrfE80CYdSH47w.woff2) format('woff2');
+    unicode-range: U+0100-024F, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF;
+  }
+  /* latin */
+  @font-face {
+    font-family: 'Fjalla One';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Fjalla One'), local('FjallaOne-Regular'), url(https://fonts.gstatic.com/s/fjallaone/v5/rxxXUYj4oZ6Q5oDJFtEd6vk_vArhqVIZ0nv9q090hN8.woff2) format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
+  }
+html,body{height:100% !important}
+  .input-container {
+    width:35%;
+    margin:15px auto 0;
+    position: relative;
+    padding: 2.5rem;
+    border-radius: 10px;
+    background: linear-gradient(to bottom, #666, #444);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+  }
+  .input-container:before {
+    content: "";
+    position: absolute;
+    top: 17%;
+    left: 5%;
+    height: 66%;
+    width: 90%;
+    border-radius: 10px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1), 0 -1px 0 1px rgba(255, 255, 255, 0.1);
+    background: linear-gradient(to bottom, #444, #666);
+  }
+  .input-container .buttons{    display: block;
+    position: absolute;
+    right: 15px;
+    top: 27px;}
+  .input-container input{border: none !important;
+    color: #fff;
+    position: relative;
+    z-index: 999;
+    width: 90%;
+    display: block;
+    left: 5%;
+    height: 70%;
+    background: #333;
+    box-shadow: inset 0 0px 8px #000, 0 1px 0px 1px rgba(255, 255, 255, 0.4);
+    border-radius: 10px;
+    text-align: center;
+    color: #fff;
+    text-shadow: -2px -2px 0 #aaa;
+    font: 2rem/1.4 monaco, monospace;
+  }
+  input[type="number"] {
+    -webkit-appearance: textfield;
+       -moz-appearance: textfield;
+            appearance: textfield;
+  }
+  input[type=number]::-webkit-inner-spin-button, 
+  input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none;
+  }
+  .input-container .btn {
+    font-size: 1.2rem;
+    padding: 2px 5px;
+    margin: 2px;
+    border-radius: 2px;
+    border: 0;
+    transition: .2s ease-out;
+    text-transform: uppercase;
+    white-space: normal !important;
+    word-wrap: break-word;
+    cursor: pointer;
+    width: 20px;
+    text-align: center;
+    display: block;
+}
+   .peg, .wheelSVG {
+    visibility: hidden;
+   }
+   .wheelContainer, body, html {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+   }
+   .centerCircle, .valueContainer, .wheelOutline, .wheelText {
+    pointer-events: none;
+   }
+   .toast, .wheelContainer, body, html {
+    text-align: center;
+   }
+   .wheelContainer, button {
+    transform: translate(-50%, 0);
+   }
+   .toast, .wheelContainer button,.spinner-container button  {
+    position: absolute;
+    background-color: #E81D62;
+   }
+   body {
+    background-color: #2d2d2d;
+    overflow: hidden;
+   }
+   body, html {
+    margin: 0;
+    padding: 0;
+   }
+   .wheelContainer {
+    position: absolute;
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+    left: 50%;
+    top: 100px;
+   }
+   .wheelSVG {
+    position: absolute;
+    overflow: visible;
+    width: 100%;
+    height: auto; 
+   }
+   .wheelText {
+    text-anchor: middle;
+    font-family: 'Fjalla One', Arial, sans-serif;
+    -webkit-user-select: none;
+    user-select: none;
+   }
+   .toast {
+    border-radius: 12px;
+    opacity: 0;
+   }
+   .toast p {
+    clear: both;
+    font-family: 'Fjalla One', Arial, sand-serif;
+    margin: 23px;
+    font-size: 30px;
+    color: #ededed;
+    letter-spacing: 0;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    line-height: 32px;
+    -webkit-transition: line-height .2s ease;
+    transition: line-height .2s ease;
+   }
+   .wheelContainer button,.spinner-container button {
+    left:50%;
+    width: 80%;
+    top: 20px;
+    max-width: 400px;
+    padding: 20px;
+    font-weight: 700;
+    font-size: 2rem;
+    color: #ededed;
+    border-radius: 6px;
+    border: none;
+    box-shadow: 0 2px 0 #D71559;
+    cursor: pointer;
+    font-family: "Fjalla One", Helvetica, Arial, sans-serif;
+   }
+   .canspin{font-size:2rem;position:absolute;}
+   @media only screen and (max-width: 480px) {
+    .toast p, .toast span {
+     font-size: 18px;
+     line-height: 18px;
+    }
+   }
+   @media only screen and (min-width: 481px) and (max-width: 990px) {
+    .canspin{position:relative;}
+    .canspin span{margin:10px auto 0;width:50%;display:block;line-height:30px;}
+
+
+   }
+   @media only screen and (min-width: 481px) and (max-width: 800px) {
+    .toast p, .toast span {
+     font-size: 38px;
+     line-height: 38px;
+    }
+   }
+   @media only screen and (min-width: 801px) {
+    .toast p, .toast span {
+     font-size: 58px;
+     line-height: 60px;
+    }
+   }
+   @media only screen and (max-height: 480px) {
+    .toast p, .toast span {
+     font-size: 33px;
+     line-height: 35px;
+    }
+    button {
+     font-size: 2rem;
+     padding: 10px;
+     width: 40%;
+    }
+    .wheelContainer {
+     top: 100px;
+    }
+   }
+   .wheelContainer button:focus ,.spinner-container button:focus {
+    outline: 0;
+   }
+
+   .spinner-container{
+     position: relative;
+   }
+   @media only screen and (max-width: 480px) {
+    .input-container .buttons{right:0;}
+    .input-container input{width:100%;}
+    .input-container{width:50%;}
+    .toast  p, .toast span{font-size: 20px;
+      line-height: 25px;
+      padding: 0;
+      margin: 10px;}
+    .toast{margin-top:10px;}
+    .spinner-container button{padding:6px;font-size:1.4rem;}
+    .canspin{font-size:1.6rem;position:relative;}
+    .canspin span{margin:10px 5% 0;width:90%;display:block;line-height:30px;}
+}

@@ -1,0 +1,97 @@
+<nav class="navbar is-dark">
+  <div class="container">
+    <div class="navbar-brand">
+      <a class="navbar-item" routerLink="/home">
+        <img src="assets/navbarlogo.png" alt="Nod Logo">
+      </a>
+      <div class="navbar-burger burger" (click)="burgerOpen = !burgerOpen" [ngClass]="{'is-active': burgerOpen}"
+        data-target="nod-nav-menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+
+    <div id="nod-nav-menu" class="navbar-menu" [ngClass]="{'is-active': burgerOpen}">
+      <div class="navbar-start">
+
+        <!-- User section -->
+        <a class="navbar-item" routerLink="/home" routerLinkActive="is-active" *ngIf="authService.isAuthenticated() && authService.getRole() == 'User'">
+          <fa-icon icon="home"></fa-icon> &nbsp; Home
+        </a>
+        <a class="navbar-item" routerLink="/network" routerLinkActive="is-active" *ngIf="authService.isAuthenticated() && authService.getRole() == 'User'">
+          <fa-icon icon="users" [ngClass]="{'is-badge-danger badge is-badge-left': budgiesService.friendRequests!=0}"
+            [attr.data-badge]="budgiesService.friendRequests"></fa-icon>
+          &nbsp; Network
+        </a>
+        <a class="navbar-item" routerLink="/ads" routerLinkActive="is-active" *ngIf="authService.isAuthenticated() && authService.getRole() == 'User'">
+          <fa-icon icon="table"></fa-icon> &nbsp; Ads
+        </a>
+        <a class="navbar-item" routerLink="/conversation" routerLinkActive="is-active" *ngIf="authService.isAuthenticated() && authService.getRole() == 'User'">
+          <fa-icon icon="comments" [ngClass]="{'is-badge-danger badge is-badge-left': budgiesService.messages!=0}"
+            [attr.data-badge]="budgiesService.messages"></fa-icon> &nbsp; Conversations
+        </a>
+        <a class="navbar-item" routerLink="/notifications" routerLinkActive="is-active" *ngIf="authService.isAuthenticated() && authService.getRole() == 'User'">
+          <fa-icon icon="bell" [ngClass]="{'is-badge-danger badge is-badge-left': budgiesService.notifications!=0}"
+            [attr.data-badge]="budgiesService.notifications"></fa-icon> &nbsp; Notifications
+        </a>
+
+        <!-- Admin section -->
+        <a class="navbar-item" routerLink="/dashboard" routerLinkActive="is-active" *ngIf="authService.isAuthenticated() && authService.getRole() == 'Admin'">
+          <fa-icon icon="tachometer-alt"></fa-icon> &nbsp; Dashboard
+        </a>
+      </div>
+
+      <div class="navbar-end">
+
+        <div class="navbar-item has-dropdown is-hoverable has-shadow" *ngIf="authService.isAuthenticated()">
+          <a class="navbar-link">
+            <fa-icon icon="user"></fa-icon> &nbsp; {{ authService.fullName }}
+          </a>
+          <div class="navbar-dropdown is-boxed is-right">
+            <a class="navbar-item" *ngIf="authService.getRole() == 'User'" routerLink="/profile" routerLinkActive="is-active">
+              <fa-icon icon="user-circle"></fa-icon> &nbsp;Profile
+            </a>
+            <a class="navbar-item" *ngIf="authService.getRole() == 'User'" routerLink="/settings" routerLinkActive="is-active">
+              <fa-icon icon="cog"></fa-icon> &nbsp; Settings
+            </a>
+            <hr class="navbar-divider">
+            <a class="navbar-item" (click)="authService.logout()">
+              <fa-icon icon="sign-out-alt"></fa-icon> &nbsp; Log out
+            </a>
+          </div>
+
+        </div>
+
+        <div class="field is-horizontal" *ngIf="!authService.isAuthenticated()">
+          <div class="field-body" (keypress)="onSubmit($event)">
+            <div class="field">
+              <input type="text" class="input" placeholder="Email" [(ngModel)]="loginData.Email">
+            </div>
+            <div class="field">
+              <input type="password" class="input" placeholder="Password" [(ngModel)]="loginData.Password">
+            </div>
+            <div class="field">
+              <a class="button is-dark is-inverted is-outlined" (click)="authService.login(loginData)">Sign In</a>
+            </div>
+          </div>
+        </div>
+
+
+        <!-- <div class="field is-horizontal" *ngIf="!authService.isAuthenticated()">
+          <div class="field-body">
+            <div class="field">
+              <a class="navbar-item" routerLink="/login">
+                Forgot Password?
+              </a>
+            </div>
+          </div>
+        </div> -->
+
+
+
+
+      </div>
+    </div>
+  </div>
+</nav>

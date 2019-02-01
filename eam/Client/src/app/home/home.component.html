@@ -1,0 +1,129 @@
+<h1 class="title is-2">Καλώς Ορίσατε στόν Εύδοξο!</h1>
+<h2 class="subtitle is-3">Ο Εύδοξος είναι μια ηλεκτρονική πλατφόρμα διαχείρισης συγγραμμάτων.</h2>
+<br>
+
+<div class="tile is-ancestor" *ngIf="!authService.isAuthenticated()">
+    <div class="tile is-vertical">
+        <div class="tile">
+            <div class="tile is-parent is-vertical">
+                <article class="tile is-child notification is-link">
+                    <p class="title">
+                        <fa-icon size="2x" icon="user-graduate"></fa-icon> &nbsp; Φοιτητές
+                    </p>
+                    <br>
+                    <p class="subtitle">
+                        <fa-icon icon="file-alt"></fa-icon> &nbsp; <a [routerLink]="[ '/application' ]">Δήλωση
+                            Συγγραμμάτων</a>
+                    </p>
+                    <p class="subtitle">
+                        <fa-icon icon="history"></fa-icon> &nbsp; <a [routerLink]="[ '/application-history' ]">Ιστορικό
+                            Δηλώσεων</a>
+                    </p>
+                    <p class="subtitle">
+                        <fa-icon icon="search"></fa-icon> &nbsp; <a [routerLink]="[ '/search' ]">Αναζήτηση
+                            συγγραμμάτων</a>
+                    </p>
+                    <p class="subtitle">
+                        <fa-icon icon="question-circle"></fa-icon> &nbsp; <a target="_blank" href="../../assets/students.pdf">Βοήθεια</a>
+                    </p>
+                </article>
+                <article class="tile is-child notification is-info">
+                    <p class="title">
+                        <fa-icon size="2x" icon="book"></fa-icon> &nbsp; Εκδότες
+                    </p>
+                    <br>
+                    <p class="subtitle">
+                        <fa-icon icon="screwdriver"></fa-icon> &nbsp; To be constructed...
+                    </p>
+                </article>
+            </div>
+            <div class="tile is-parent is-vertical">
+                <article class="tile is-child notification is-info">
+                    <p class="title">
+                        <fa-icon size="2x" icon="pen-alt"></fa-icon> &nbsp; Γραμματείες Τμημάτων
+                    </p>
+                    <br>
+                    <p class="subtitle">
+                        <fa-icon icon="book"></fa-icon> &nbsp; <a [routerLink]="[ '/search' ]">Συγγράμματα</a>
+                    </p>
+                    <p class="subtitle">
+                        <fa-icon icon="graduation-cap"></fa-icon> &nbsp; <a [routerLink]="[ '/lessons' ]">Μαθήματα</a>
+                    </p>
+                    <p class="subtitle">
+                        <fa-icon icon="history"></fa-icon> &nbsp; <a [routerLink]="[ '/secretary-history' ]">Διαχείριση Μαθημάτων - Βιβλίων</a>
+                    </p>
+                    <p class="subtitle">
+                        <fa-icon icon="question-circle"></fa-icon> &nbsp; <a target="_blank" href="../../assets/secretary.pdf">Βοήθεια</a>
+                    </p>
+                </article>
+                <article class="tile is-child notification is-link">
+                    <p class="title">
+                        <fa-icon size="2x" icon="book-open"></fa-icon> &nbsp; Βιβλιοθήκες
+                    </p>
+                    <br>
+                    <p class="subtitle">
+                        <fa-icon icon="screwdriver"></fa-icon> &nbsp; To be constructed...
+                    </p>
+                    <p class="subtitle"></p>
+                </article>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="tile is-ancestor" *ngIf="authService.isAuthenticated() && authService.getRoleId() == '0'">
+    <div class="tile is-vertical">
+        <div class="tile">
+            <div class="tile is-parent is-vertical">
+                <article class="tile is-child notification is-link">
+                    <p class="title">
+                        <fa-icon size="2x" icon="user-graduate"></fa-icon> &nbsp; Φοιτητές
+                    </p>
+                    <br>
+                    <p class="subtitle">
+                        <fa-icon icon="file-alt"></fa-icon> &nbsp; <a [routerLink]="[ '/application' ]">Δήλωση
+                            Συγγραμμάτων</a>
+                    </p>
+                    <p class="subtitle">
+                        <fa-icon icon="history"></fa-icon> &nbsp; <a [routerLink]="[ '/application-history' ]">Ιστορικό
+                            Δηλώσεων</a>
+                    </p>
+                    <p class="subtitle">
+                        <fa-icon icon="search"></fa-icon> &nbsp; <a [routerLink]="[ '/search' ]">Αναζήτηση
+                            συγγραμμάτων</a>
+                    </p>
+                    <p class="subtitle">
+                        <fa-icon icon="question-circle"></fa-icon> &nbsp; <a target="_blank" href="../../assets/students.pdf">Βοήθεια</a>
+                    </p>
+                </article>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="tile is-ancestor" *ngIf="authService.isAuthenticated() && authService.getRoleId() == '1'">
+    <div class="tile is-vertical">
+        <div class="tile">
+            <div class="tile is-parent is-vertical">
+                <article class="tile is-child notification is-info">
+                    <p class="title">
+                        <fa-icon size="2x" icon="pen-alt"></fa-icon> &nbsp; Γραμματείες Τμημάτων
+                    </p>
+                    <br>
+                    <p class="subtitle">
+                        <fa-icon icon="book"></fa-icon> &nbsp; <a [routerLink]="[ '/search' ]">Συγγράμματα</a>
+                    </p>
+                    <p class="subtitle">
+                        <fa-icon icon="graduation-cap"></fa-icon> &nbsp; <a [routerLink]="[ '/lessons' ]">Μαθήματα</a>
+                    </p>
+                    <p class="subtitle">
+                        <fa-icon icon="history"></fa-icon> &nbsp; <a [routerLink]="[ '/secretary-history' ]">Διαχείριση Μαθημάτων - Βιβλίων</a>
+                    </p>
+                    <p class="subtitle">
+                        <fa-icon icon="question-circle"></fa-icon> &nbsp; <a target="_blank" href="../../assets/secretary.pdf">Βοήθεια</a>
+                    </p>
+                </article>
+            </div>
+        </div>
+    </div>
+</div>

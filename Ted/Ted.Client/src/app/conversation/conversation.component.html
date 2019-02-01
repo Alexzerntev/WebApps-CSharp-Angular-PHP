@@ -1,0 +1,76 @@
+<div class="columns">
+
+  <div class="column is-4">
+    <div class="box">
+      <nav class="panel">
+        <p class="panel-heading">
+          Conversations
+        </p>
+        <div class="panel-block"></div>
+        <a class="panel-block" *ngFor="let convaersation of convaersations" (click)="changeConversation(convaersation)" [ngClass]="{'unacknoledged': convaersation.HasNewMessagees}"
+          [ngClass]="{'is-active': selectedConversation == convaersation}">
+          <div class="media-left">
+            <p class="image is-48x48">
+              <img class="is-rounded" [id]="convaersation.ToUser.Id" [changed]="changed" profile-image />
+            </p>
+          </div>
+          <div class="media-content">
+            <p>{{convaersation.ToUser.FirstName + " "+ convaersation.ToUser.LastName}}</p>
+            <p>{{convaersation.ToUser.CurrentState}}</p>
+          </div>
+        </a>
+      </nav>
+    </div>
+  </div>
+
+  <div #scrollMe class="container">
+    <div class="column is-offset-1">
+      <div class="columns">
+        <div class="column is-offset-5">
+          <a (click)="showMore()" class="has-text-centered">Show More</a>
+        </div>
+      </div>
+      <div class="columns" *ngFor="let message of messages">
+        <div [ngClass]="{'is-offset-5': message.Sender.Id == authService.userId}" class="column">
+          <div class="buttons" [ngClass]="{'is-right': message.Sender.Id == authService.userId}">
+            <div class="field">
+              <label class="label">
+                {{message.Sender.FirstName}}
+              </label>
+              <a class="button is-rounded " [ngClass]="{'is-link': message.Sender.Id == authService.userId}">
+                {{message.Text}}
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+
+<div class="columns">
+  <div class="column is-offset-5">
+    <hr>
+    <div class="field-has-addons">
+      <div class="columns">
+        <div class="column is-10">
+          <div class="control" (keypress)="onSubmit($event)">
+            <textarea [(ngModel)]="messageToSend" rows="1" class="input is-focused" type="text" placeholder="Send a message"></textarea>
+          </div>
+        </div>
+        <div class="column">
+          <div class="control">
+            <div class="buttons is-centered">
+              <a class="is-primary button is-rounded" (click)="sendMessage()">
+                <fa-icon size="lg" icon="paper-plane"></fa-icon>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

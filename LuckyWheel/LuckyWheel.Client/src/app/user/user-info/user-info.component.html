@@ -1,0 +1,57 @@
+<div class="container main-content">
+  <div class="row">
+    <div class="col-md-3 image-upload">
+      <div>
+          <img profile-image width="100" height="100" />
+      </div>
+      <div>
+        <div class="progress" style="">
+          <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': uploader.progress + '%' }"></div>
+        </div>
+      </div>
+      <button type="button" class="btn btn-success btn-s" (click)="uploader.uploadAll()" [disabled]="!uploader.getNotUploadedItems().length">
+        <span class="fa fa-upload"></span> Upload
+      </button>
+      <input type="file" ng2FileSelect [uploader]="uploader" />
+    </div>
+    <div class="col-md-6">
+      <form>
+
+        <p class="h5 text-center mb-4">Τα στοιχεία σας</p>
+
+        <div class="md-form">
+          <i class="fa fa-user prefix grey-text"></i>
+          <input type="text" id="form3" class="form-control" name="FirstName" [(ngModel)]="userInfo.FirstName" disabled>
+        </div>
+
+        <div class="md-form">
+          <i class="fa fa-user prefix grey-text"></i>
+          <input type="text" id="form2" class="form-control" name="LastName" [(ngModel)]="userInfo.LastName" disabled>
+        </div>
+
+        <div class="md-form">
+          <i class="fa fa-envelope prefix grey-text"></i>
+          <input type="text" id="form32" class="form-control" name="Email" [(ngModel)]="userInfo.Email" disabled>
+        </div>
+
+        <div class="md-form">
+          <i class="fa fa-credit-card-alt prefix grey-text"></i>
+          <input type="text" id="form32" class="form-control" name="IBAN" [(ngModel)]="userInfo.IBAN" mdbActive>
+          <label for="form34">IBAN</label>
+        </div>
+
+        <div class="md-form">
+          <i class="fa fa-calendar prefix grey-text"></i>
+          <input type="text" id="form32" class="form-control" name="BirthDate" [(ngModel)]="userInfo.BirthDate" disabled>
+        </div>
+
+        <div class="text-center">
+          <button class="btn btn-success waves-light" mdbRippleRadius>Αποθήκευση Αλλαγών
+            <i class="fa fa-floppy-o ml-1"></i>
+          </button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>

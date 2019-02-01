@@ -1,0 +1,307 @@
+<div class="columns">
+
+    <div class="column is-3">
+        <div class="card half-background">
+            <br>
+            <div class="field">
+                <figure style="z-index:3" class="image is-96x96 has-image-centered">
+                    <img class="is-rounded image-border" [changed]="changed" profile-image />
+                </figure>
+            </div>
+            <br>
+            <div class="card-content">
+
+                <div class="media">
+                    <div style="z-index:3" class="media-content has-text-centered">
+                        <a routerLink="/settings" class="title is-4">{{authService.fullName}}</a>
+                    </div>
+                </div>
+
+                <div class="media">
+                    <div style="z-index:3" class="media-content has-text-centered">
+                        <div class="content  has-text-centered" *ngIf="experiance.Title != undefined">
+                            <h6 class="subtitle is-5  is-size-6">{{experiance.Title}} at {{experiance.Company}}</h6>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="media">
+                    <div style="z-index:3" class="media-content has-text-centered">
+                        <div class="content  has-text-centered">
+                            <a routerLink="/network">My Network</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="media">
+                <div style="z-index:3" class="media-content has-text-centered">
+                    <footer class="card-footer">
+                        <p class="card-footer-item">Connections {{connectionsCount}}</p>
+                    </footer>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="column">
+
+        <div class="card">
+
+            <div class="card-content">
+                <div class="field">
+                    <label class="label">
+                        <div class="columns">
+                            <div class="column is-narrow">
+                                <div class="field">
+                                    <figure class="image is-32x32">
+                                        <img class="is-rounded" [changed]="changed" profile-image />
+                                    </figure>
+                                </div>
+                            </div>
+                            <div class="column">
+                                <p>{{authService.fullName}}</p>
+                                <p *ngIf="experiance.Title != undefined" class="subtitle is-6 is-size-7">{{experiance.Title}}
+                                    at {{experiance.Company}}</p>
+                            </div>
+                        </div>
+                    </label>
+                    <div *ngIf="!showTitle">
+                        <div class="control">
+                            <textarea [(ngModel)]="title" #article class="textarea" placeholder="Share an article, photo, video or idea"></textarea>
+                        </div>
+                    </div>
+                    <div *ngIf="showTitle">
+                        <div class="control">
+                            <input [(ngModel)]="title" #article class="input" type="text" placeholder="Title...">
+                        </div>
+                        <br>
+                        <div class="control">
+                            <textarea [(ngModel)]="description" class="textarea" placeholder="Content..."></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <footer class="card-footer">
+                <div class="card-footer-item">
+                    <div class="columns">
+                        <div class="column is-11">
+                            <div class="buttons">
+                                <button class="button is-rounded" (click)="focusInput(); postType = PostType.Article; showTitle = !showTitle">
+                                    <fa-icon icon="edit"></fa-icon> &nbsp; Write an article
+                                </button>
+                                <input style="display: none" type="file" accept=".jpeg,.png,.jpg" (change)="onFileChanged($event)" #fileInput1>
+                                <input style="display: none" type="file" accept=".mp3" (change)="onFileChanged($event)" #fileInput2>
+                                <input style="display: none" type="file" accept=".mp4" (change)="onFileChanged($event)" #fileInput3>
+                                <button class="button is-rounded" (click)="postType = PostType.Image;fileInput1.click();">
+                                    <fa-icon icon="image"></fa-icon> &nbsp; Images
+                                </button>
+                                <button class="button is-rounded" (click)="postType = PostType.Audio;fileInput2.click();">
+                                    <fa-icon icon="music"></fa-icon> &nbsp; Audio
+                                </button>
+                                <button class="button is-rounded" (click)="postType = PostType.Video;fileInput3.click();">
+                                    <fa-icon icon="video"></fa-icon> &nbsp; Video
+                                </button>
+                            </div>
+                        </div>
+                        <div class="column">
+                            <button class="button is-primary" (click)="post()">Post</button>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </div>
+
+        <br>
+
+        <div *ngFor="let post of posts; let i=index">
+
+            <div class="card">
+                <section class="section">
+                    <article class="media">
+                        <figure class="media-left">
+                            <p class="image is-48x48">
+                                <img class="is-rounded" [id]="post.User.Id" [changed]="changed" profile-image />
+                            </p>
+                        </figure>
+                        <div class="media-content">
+                            <div class="content">
+                                <div class="columns">
+                                    <div class="column">
+                                        <p>
+                                            <strong class="pointer" (click)="navigateToView(post.User.Id)">
+                                                {{post.User.FirstName + " " + post.User.LastName}}
+                                                <p *ngIf="experiance.Title != undefined" class="subtitle is-6 is-size-7"><strong>{{post.User.CurrentState}}</strong>
+                                                    <br> {{post.PostedDate
+                                                    | date:'EEEE MMMM d - HH:mm'}}</p>
+                                            </strong>
+                                            <br>
+                                            <strong>
+                                                <p *ngIf="!isBeingEdited[i]">{{post.Title}}</p>
+                                            </strong>
+                                            <span *ngIf="post.Type == PostType.Article">{{post.Description}}</span>
+                                            <span *ngIf="isBeingEdited[i]" class="control">
+                                                <textarea cols="2" [(ngModel)]="post.Title" class="textarea"></textarea>
+                                            </span>
+                                            <span *ngIf="post.Type == PostType.Image && post.FileUrl != null">
+                                                <br>
+                                                <figure class="image is-16by9">
+                                                    <img [src]="post.FileUrl">
+                                                </figure>
+                                            </span>
+                                            <span *ngIf="post.Type == PostType.Audio && post.FileUrl != null">
+                                                <br>
+                                                <br>
+                                                <audio controls>
+                                                    <source [src]="post.FileUrl" type="audio/mp3">
+                                                </audio>
+                                            </span>
+                                            <span *ngIf="post.Type == PostType.Video && post.FileUrl != null">
+                                                <br>
+                                                <video width="680" height="260" controls>
+                                                    <source [src]="post.FileUrl" type="video/mp4">
+                                                </video>
+                                            </span>
+                                            <br>
+                                            <small><a (click)="showSubscribers(post)">{{post.Subscribers?.length}}
+                                                    Subscribers</a> · <a>{{post.Comments?.length}}
+                                                    Comments</a></small>
+                                            <br>
+                                            <br>
+                                            <small><a class="title is-6">
+                                                    <span (click)="doSubscribeAction(post)" [ngClass]="{'has-text-primary has-text-weight-bold': isSubscribed(post)}">
+                                                        <fa-icon icon="thumbs-up"></fa-icon> Subscribe
+                                                    </span>
+                                                </a> &nbsp; · &nbsp; <a (click)="addComment(i)" class="title is-6">
+                                                    <fa-icon icon="comment"></fa-icon> Comment
+                                                </a></small>
+                                        </p>
+                                    </div>
+                                    <div class="column is-3">
+                                        <div class="buttons" *ngIf="post.User.Id == authService.userId">
+                                            <button *ngIf="!isBeingEdited[i] && post.Type != PostType.Article" (click)="isBeingEdited[i] = !isBeingEdited[i]"
+                                                class="button is-primary is-rounded is-inverted">
+                                                <fa-icon icon="pencil-alt"></fa-icon>
+                                            </button>
+                                            <button *ngIf="isBeingEdited[i]" (click)="isBeingEdited[i] = !isBeingEdited[i];updatePost(post);"
+                                                class="button is-success is-rounded is-inverted">
+                                                <fa-icon icon="save"></fa-icon>
+                                            </button>
+                                            <button *ngIf="isBeingEdited[i]" (click)="isBeingEdited[i] = !isBeingEdited[i]"
+                                                class="button is-warning is-rounded is-inverted">
+                                                <fa-icon icon="undo-alt"></fa-icon>
+                                            </button>
+                                            <button (click)="deletePost(post)" class="button is-danger is-rounded is-inverted">
+                                                <fa-icon icon="trash-alt"></fa-icon>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <article class="media" *ngFor="let comment of post.Comments">
+                                <figure class="media-left">
+                                    <p class="image is-48x48">
+                                        <img class="is-rounded" [id]="comment.User.Id" [changed]="changed"
+                                            profile-image />
+                                    </p>
+                                </figure>
+                                <div class="media-content">
+                                    <div class="content">
+                                        <div class="columns">
+                                            <div class="column">
+                                                <p>
+                                                    <strong>
+                                                        <span class="pointer" (click)="navigateToView(comment.User.Id)">{{comment.User.FirstName
+                                                            + " " + comment.User.LastName}}</span>
+                                                        <p *ngIf="experiance.Title != undefined" class="subtitle is-6 is-size-7"><strong>{{comment.User.CurrentState}}</strong>
+                                                            <br> {{post.PostedDate
+                                                            | date:'EEEE MMMM d - HH:mm'}}</p>
+                                                    </strong>
+                                                    <br>
+                                                    {{comment.Text}}
+                                                    <br>
+                                                </p>
+                                            </div>
+                                            <div *ngIf="comment.User.Id == authService.userId" class="column is-1">
+                                                <button (click)="deleteComment(post,comment.Id)" class="button is-danger is-rounded is-inverted">
+                                                    <fa-icon icon="trash-alt"></fa-icon>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </article>
+                        </div>
+                    </article>
+                    <article class="media" *ngIf="canComment[i] == true">
+                        <figure class="media-left">
+                            <p class="image is-32x32">
+                                <img class="is-rounded" [changed]="changed" profile-image />
+                            </p>
+                        </figure>
+                        <div class="media-content">
+                            <div class="field">
+                                <p class="control">
+                                    <textarea [(ngModel)]="this.comment.Text" class="textarea" rows="1" placeholder="Add a comment..."></textarea>
+                                </p>
+                            </div>
+                            <div class="field">
+                                <p class="control">
+                                    <button (click)="postComment(post)" class="button">Post comment</button>
+                                </p>
+                            </div>
+                        </div>
+                    </article>
+                </section>
+            </div>
+            <br>
+
+        </div>
+
+        <div *ngIf="postId == undefined">
+            <a (click)="page = page+1;getPosts();">Show More</a>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal" [ngClass]="{'is-active': modal != 'closed'}">
+    <div class="modal-background"></div>
+    <div class="modal-card">
+        <header class="modal-card-head">
+            <p class="modal-card-title">Applicants</p>
+            <button class="delete" aria-label="close" (click)="modal = 'closed'"></button>
+        </header>
+        <section class="modal-card-body">
+            <!-- Content ... -->
+            <div class="columns">
+                <div class="column">
+
+                    <div class="card" *ngFor="let subscriber of subscribers">
+                        <a (click)="navigateToView(subscriber.Id)">
+                            <div class="card-content">
+                                <div class="media">
+                                    <div class="media-left">
+                                        <figure class="image is-96x96">
+                                            <img class="is-rounded" [id]="subscriber.Id" [changed]="changed"
+                                                profile-image />
+                                        </figure>
+                                    </div>
+                                    <div class="media-content">
+                                        <p class="title is-4">{{subscriber.FirstName + " " + subscriber.LastName }}</p>
+                                        <p class="subtitle is-6">
+                                            <fa-icon icon="users"></fa-icon> &nbsp; {{subscriber.CurrentState}}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <p *ngIf="subscribers.length == 0" class="title is-4">None</p>
+
+                </div>
+            </div>
+        </section>
+    </div>
+</div>

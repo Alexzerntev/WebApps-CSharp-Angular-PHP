@@ -1,0 +1,10 @@
+.dropdown .dropdown-menu .dropdown-item:hover, .dropdown .dropdown-menu .dropdown-item:active, .dropdown .dropdown-menu .dropdown-item:focus{
+    color: #1d1e1f !important;}
+.navbar-collapse{height:auto!important;}
+   
+@media only screen and (max-width : 990px) {
+        .dropdown.show .dropdown-menu,.dropdown{width:100% !important;position:relative !important;-webkit-transform:none;transform:none;}
+        .navbar-nav ul{display:block !important;}
+        .navbar-collapse{height:auto !important;}
+        .navbar.navbar-dark .breadcrumb .nav-item .nav-link, .navbar.navbar-dark .navbar-nav .nav-item .nav-link{width:100% !important;}
+}

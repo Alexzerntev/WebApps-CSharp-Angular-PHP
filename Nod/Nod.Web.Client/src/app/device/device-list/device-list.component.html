@@ -1,0 +1,29 @@
+<div class="table-container">
+  <table class="table is-fullwidth is-hoverable">
+    <thead>
+      <tr>
+        <th></th>
+        <th>Device Id</th>
+        <th>Device Nick Name</th>
+        <th>Options</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let device of devices  | paginate: { itemsPerPage: 10, currentPage: page }; let i = index;">
+        <th>{{i + 1}}</th>
+        <td>{{device.Id}}</td>
+        <td>{{device.NickName}}</td>
+        <td>
+          <div class="buttons">
+            <Button class="button is-primary" (click)="openDevice(device, true)">
+              <fa-icon icon="tablet-alt"></fa-icon> &nbsp;Live Track</Button>
+            <Button class="button is-info" (click)="openDevice(device, false)">
+              <fa-icon icon="history"></fa-icon> &nbsp;Track History</Button>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<pagination (onPageChange)="onPageChange($event)"></pagination>

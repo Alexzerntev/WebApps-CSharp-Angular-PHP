@@ -1,0 +1,70 @@
+<mdb-navbar SideClass="navbar  navbar-expand-lg navbar-dark bg-indigo " [containerInside]="true">
+
+  <logo>
+    <a class="logo navbar-brand" [routerLink]="['/home']">
+      <strong>Lucky Wheel</strong>
+    </a>
+  </logo>
+  <links>
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item waves-light" mdbRippleRadius>
+        <a class="nav-link" [routerLink]="['/home']">Αρχική</a>
+      </li>
+      <li class="nav-item waves-light" mdbRippleRadius *ngIf="authService.isLoggedIn">
+        <a class="nav-link" [routerLink]="['/spin-game']">Ο τροχός της τύχης</a>
+      </li>
+
+      <li class="nav-item dropdown waves-light" dropdown *ngIf="authService.isLoggedIn">
+        <a dropdownToggle class="nav-link  dropdown-toggle" mdbRippleRadius>
+          Ιστορικό
+        </a>
+
+        <div class="dropdown-menu dropdown-primary">
+          <a class="dropdown-item" [routerLink]="['/spins']">Γυρίσματα</a>
+          <a class="dropdown-item" [routerLink]="['/transactions']">Μεταφορές Χρημάτων</a>
+        </div>
+      </li>
+      <li class="nav-item waves-light" mdbRippleRadius>
+        <a class="nav-link" [routerLink]="['/deposit-codes']">Deposit Codes
+        </a>
+      </li>
+
+    </ul>
+    <ul class="navbar-nav nav-flex-icons" *ngIf="authService.isLoggedIn">
+      
+    </ul>
+    <ul class="navbar-nav nav-flex-icons" *ngIf="authService.isLoggedIn">
+      <li class="nav-item waves-light" mdbRippleRadius>
+        <a class="nav-link">{{ userProfile.Balance  | number :'1.1-5' }} &euro;</a>
+      </li>
+      <li class="nav-item dropdown waves-light" dropdown>
+        <a dropdownToggle class="nav-link  dropdown-toggle" mdbRippleRadius>
+
+          <i class="fa fa-user-o"></i>{{ userProfile.LastName }} {{ userProfile.FirstName }}
+        </a>
+        <div class="dropdown-menu dropdown-primary">
+          <a class="dropdown-item" [routerLink]="['/profile']">
+            <i class="fa fa-user"></i> Προφίλ</a>
+          <a class="dropdown-item" (click)="authService.logout()">
+            <i class="fa fa-sign-out"></i> Αποσύνδεση</a>
+        </div>
+      </li>
+    </ul>
+    <ul class="navbar-nav nav-flex-icons" *ngIf="!authService.isLoggedIn">
+      <li class="nav-item waves-light" mdbRippleRadius>
+        <a class="nav-link" [routerLink]="['/register']">Register
+          <i class="fa fa-user-plus"></i>
+        </a>
+      </li>
+    </ul>
+    <ul class="navbar-nav nav-flex-icons" *ngIf="!authService.isLoggedIn">
+      <li class="nav-item waves-light" mdbRippleRadius>
+        <a class="nav-link" [routerLink]="['/login']">Login
+          <i class="fa fa-sign-in"></i>
+        </a>
+      </li>
+    </ul>
+
+  </links>
+
+</mdb-navbar>

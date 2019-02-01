@@ -1,0 +1,119 @@
+<div class="columns">
+    <div class="column is-3">
+        <div class="field">
+            <figure class="image is-128x128 has-image-centered">
+                <img class="is-rounded" [changed]="changed" profile-image />
+            </figure>
+        </div>
+        <div class="field has-text-centered">
+            <button class="button is-primary is-small" *ngIf="!showUploader" (click)="showUploader = !showUploader">Change
+                Profile Photo
+            </button>
+            <image-upload *ngIf="showUploader" [preview]="false" [url]="uploadUrl" [headers]="myHeaders" [max]="1" [extensions]="['jpeg','png']"
+                (uploadFinished)="onUploadFinished($event)" [style]="customStyle"></image-upload>
+        </div>
+    </div>
+
+    <div class="column">
+        <div class="field">
+
+            <label class="label">First Name</label>
+            <div class="control has-icons-left has-icons-right">
+                <input class="input" type="text" [(ngModel)]="user.FirstName" placeholder="First Name" disabled>
+                <span class="icon is-small is-left">
+                    <fa-icon icon="user"></fa-icon>
+                </span>
+            </div>
+
+        </div>
+        <div class="field">
+
+            <label class="label">Last Name</label>
+            <div class="control has-icons-left has-icons-right">
+                <input class="input" [(ngModel)]="user.LastName" type="text" placeholder="Last Name" disabled>
+                <span class="icon is-small is-left">
+                    <fa-icon icon="user"></fa-icon>
+                </span>
+            </div>
+
+        </div>
+        <div class="field">
+
+            <label class="label">Phone Number</label>
+            <div class="control has-icons-left has-icons-right">
+                <input class="input" [(ngModel)]="user.PhoneNumber" type="text" placeholder="Phone Number" [disabled]="!canEdit">
+                <span class="icon is-small is-left">
+                    <fa-icon icon="phone"></fa-icon>
+                </span>
+            </div>
+
+        </div>
+        <div class="field">
+
+            <label class="label">E-mail</label>
+            <div class="control has-icons-left has-icons-right">
+                <input class="input" [(ngModel)]="user.Email" type="text" placeholder="E-mail" [disabled]="!canEdit">
+                <span class="icon is-small is-left">
+                    <fa-icon icon="envelope"></fa-icon>
+                </span>
+            </div>
+
+        </div>
+        <br>
+        <div class="field">
+            <div class="buttons">
+                <button *ngIf="!canEdit" class="button is-link" (click)="canEdit = !canEdit"><fa-icon icon="edit"></fa-icon>
+                    &nbsp; Edit Profile</button>
+                <button *ngIf="canEdit" class="button is-success" (click)="save()"><fa-icon icon="save"></fa-icon> &nbsp;
+                    Save</button>
+                <button *ngIf="!isChangingPassword" class="button is-info" (click)="isChangingPassword = true;"><fa-icon
+                        icon="key"></fa-icon>
+                    &nbsp; Change Password</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="columns" *ngIf="isChangingPassword">
+    <div class="column">
+        <div class="field">
+
+            <label class="label">Old Password</label>
+            <div class="control has-icons-left has-icons-right">
+                <input class="input" type="password" [(ngModel)]="changePassword.OldPassword" placeholder="Old Password">
+                <span class="icon is-small is-left">
+                    <fa-icon icon="key"></fa-icon>
+                </span>
+            </div>
+
+        </div>
+        <div class="field">
+
+            <label class="label">New Password</label>
+            <div class="control has-icons-left has-icons-right">
+                <input class="input" [(ngModel)]="changePassword.NewPassword" type="password" placeholder="New Password">
+                <span class="icon is-small is-left">
+                    <fa-icon icon="key"></fa-icon>
+                </span>
+            </div>
+
+        </div>
+
+        <div class="field">
+
+            <label class="label">Confirm New Password</label>
+            <div class="control has-icons-left has-icons-right">
+                <input class="input" [(ngModel)]="confirmPassword" type="password" placeholder="Confirm New Password">
+                <span class="icon is-small is-left">
+                    <fa-icon icon="key"></fa-icon>
+                </span>
+            </div>
+
+        </div>
+
+        <br>
+        <div class="field">
+            <button class="button is-success" (click)="validate()"><fa-icon icon="save"></fa-icon> &nbsp; Change</button>
+        </div>
+    </div>
+</div>

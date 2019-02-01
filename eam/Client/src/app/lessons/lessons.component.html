@@ -1,0 +1,134 @@
+<div class="columns">
+  <div class="column is-offset-1">
+    <h1 class="title is-4">
+      Αναζήτηση Μαθημάτων
+    </h1>
+    <h1 class="subtitle is-5">
+      Αναζητήστε μαθήματα προς αντιστοίχιση με Βιβλία
+    </h1>
+  </div>
+</div>
+
+<div class="columns">
+  <div class="column is-offset-5">
+    <figure class="image is-128x128">
+      <img src="../../assets//navbarlogo.png">
+    </figure>
+  </div>
+</div>
+
+<br>
+
+<div class="columns" (keypress)="onSubmit($event)">
+  <div class="column is-offset-1">
+
+    <div class="field has-addons">
+      <div class="control is-expanded">
+        <input class="input" type="text" placeholder="Αναζήτηση" [(ngModel)]="searchString">
+      </div>
+      <div class="control">
+        <a class="button is-info" (click)="search()">
+          <fa-icon icon="search"></fa-icon> &nbsp; Αναζήτηση
+        </a>
+      </div>
+    </div>
+
+  </div>
+  <div class="column is-1">
+  </div>
+</div>
+
+<div class="columns" *ngIf="resultCount != undefined">
+  <div class="column is-offset-1">
+    <h1 class="title is-4">Βρέθηκαν {{resultCount}} αποτελέσματα</h1>
+  </div>
+  <div class="column is-1">
+  </div>
+</div>
+
+
+
+<table class="table is-fullwidth is-hoverable" *ngIf="lessons.length != 0">
+  <thead>
+    <tr>
+      <th>Τίτλος</th>
+      <th>Έτος</th>
+      <th>Εξάμηνο</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let l of lessons | paginate: { itemsPerPage: 5, currentPage: page };" (click)="openModal(l)" style="cursor: pointer;">
+      <td>{{l.title}}</td>
+      <td>{{l.year}}</td>
+      <td>{{l.semester == 0 ? "A" : "B"}}</td>
+    </tr>
+  </tbody>
+</table>
+
+<pagination *ngIf="lessons.length > 0" (onPageChange)="onPageChange($event)"></pagination>
+
+
+
+<div class="modal" [ngClass]="{'is-active': modal != 'closed'}">
+  <div class="modal-background"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <p class="modal-card-title">Επιλέξτε βιβλίο προς αντιστοίχιση</p>
+      <button class="delete" aria-label="close" (click)="modal = 'closed'"></button>
+    </header>
+    <section class="modal-card-body">
+
+      <div class="columns" (keypress)="onSubmit2($event)">
+        <div class="column is-offset-1">
+
+          <div class="field has-addons">
+            <div class="control is-expanded">
+              <input class="input" type="text" placeholder="Αναζήτηση" [(ngModel)]="searchString2">
+            </div>
+            <div class="control">
+              <a class="button is-info" (click)="search2()">
+                <fa-icon icon="search"></fa-icon> &nbsp; Αναζήτηση
+              </a>
+            </div>
+          </div>
+
+        </div>
+        <div class="column is-1">
+        </div>
+      </div>
+
+      <div class="columns" *ngIf="resultCount != undefined">
+        <div class="column is-offset-1">
+          <h1 class="title is-4">Βρέθηκαν {{resultCount2}} αποτελέσματα</h1>
+        </div>
+        <div class="column is-1">
+        </div>
+      </div>
+
+
+
+
+      <table class="table is-fullwidth is-hoverable" *ngIf="books.length != 0">
+        <thead>
+          <tr>
+            <th>Τίτλος</th>
+            <th>Συγγραφέας</th>
+            <th>ISBN</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let b of books | paginate: { itemsPerPage: 5, currentPage: page };" (click)="add(b.id)" style="cursor: pointer;">
+            <td>{{b.title}}</td>
+            <td>{{b.author}}</td>
+            <td>{{b.isbn}}</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <pagination *ngIf="books.length > 0" (onPageChange)="onPageChange($event)"></pagination>
+
+    </section>
+    <footer class="modal-card-foot">
+    </footer>
+  </div>
+</div>

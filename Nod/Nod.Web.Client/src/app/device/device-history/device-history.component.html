@@ -1,0 +1,59 @@
+<div class="columns">
+  <div class="column">
+    <app-map *ngIf=" selectedCategory=='Gps'" [gpses]="gpses"></app-map>
+    <app-hardware-chart *ngIf="selectedCategory=='Hardware'" [charStatuses]="charStatuses"></app-hardware-chart>
+  </div>
+</div>
+<hr>
+
+<div class="columns">
+
+  <div class="column is-2">
+    <h3 class="title is-4">{{deviceNickName}}</h3>
+  </div>
+  <div class="column is-2">
+    <div class="field">
+      <label class="label">Category</label>
+      <div class="control">
+        <div class="select">
+          <select [(ngModel)]="selectedCategory" (change)="onSelectChange()">
+            <option *ngFor="let category of categories" [ngValue]="category">{{category}}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="column is-3">
+    <div class="field ">
+      <label class="label">Start</label>
+      <div class="control">
+        <date-time-picker [(date)]="startDateTime"></date-time-picker>
+      </div>
+    </div>
+  </div>
+
+  <div class="column is-3">
+    <div class="field ">
+      <label class="label">End</label>
+      <div class="control">
+        <date-time-picker [(date)]="endDateTime"></date-time-picker>
+      </div>
+    </div>
+  </div>
+
+  <div class="column is-1">
+    <div class="field ">
+      <label class="label ">&nbsp;</label>
+      <div class="control">
+        <button class="button is-success" (click)="getItems()">
+          <fa-icon icon="cloud-download-alt"></fa-icon> &nbsp; Get Entries</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<app-gps-grid *ngIf="selectedCategory=='Gps' " [gpses]="gpses"></app-gps-grid>
+<app-hardware-status-grid *ngIf="selectedCategory=='Hardware'" [hardwareStatuses]="hardwareStatuses"></app-hardware-status-grid>

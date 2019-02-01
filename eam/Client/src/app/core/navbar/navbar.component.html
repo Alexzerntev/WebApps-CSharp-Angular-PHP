@@ -1,0 +1,122 @@
+<nav class="navbar is-dark">
+  <div class="container">
+    <div class="navbar-brand">
+      <a class="navbar-item" routerLink="/home">
+        <img src="assets/navbarlogo.png" alt="Nod Logo">
+        &nbsp;
+        &nbsp;
+        <h1 class="title" style="color:white">Εύδοξος</h1>
+      </a>
+      <div class="navbar-burger burger" (click)="burgerOpen = !burgerOpen" [ngClass]="{'is-active': burgerOpen}"
+        data-target="nod-nav-menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+
+    <div id="nod-nav-menu" class="navbar-menu" [ngClass]="{'is-active': burgerOpen}">
+      <div class="navbar-start">
+
+        <!-- User section -->
+        <a class="navbar-item" routerLink="/home" routerLinkActive="is-active">
+          <fa-icon icon="home"></fa-icon> &nbsp; Αρχική
+        </a>
+
+        <div class="navbar-item has-dropdown is-hoverable has-shadow" *ngIf="!authService.isAuthenticated() || authService.getRoleId() == '0'">
+          <a class="navbar-link">
+            <fa-icon icon="user-graduate"></fa-icon> &nbsp; Φοιτητές
+
+          </a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" [routerLink]="[ '/application' ]" routerLinkActive="active">
+              <fa-icon icon="file-alt"></fa-icon> &nbsp; Δήλωση Συγγραμμάτων
+            </a>
+            <a class="navbar-item" [routerLink]="[ '/application-history' ]" routerLinkActive="active">
+              <fa-icon icon="history"></fa-icon> &nbsp; Ιστορικό Δηλώσεων
+            </a>
+            <a class="navbar-item" [routerLink]="[ '/search' ]" routerLinkActive="active">
+              <fa-icon icon="search"></fa-icon> &nbsp; Αναζήτηση συγγραμμάτων
+            </a>
+            <a class="navbar-item" target="_blank" href="../../../assets/students.pdf">
+              <fa-icon icon="question-circle"></fa-icon> &nbsp; Βοήθεια
+            </a>
+          </div>
+        </div>
+
+        <div class="navbar-item has-dropdown is-hoverable has-shadow" *ngIf="!authService.isAuthenticated() || authService.getRoleId() == '1'">
+          <a class="navbar-link">
+            <fa-icon icon="pen-alt"></fa-icon> &nbsp; Γραμματείες Τμημάτων
+          </a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" [routerLink]="[ '/search' ]" routerLinkActive="active">
+              <fa-icon icon="book"></fa-icon> &nbsp; Συγγράμματα
+            </a>
+            <a class="navbar-item" [routerLink]="[ '/lessons' ]" routerLinkActive="active">
+              <fa-icon icon="graduation-cap"></fa-icon> &nbsp; Μαθήματα
+            </a>
+            <a class="navbar-item" [routerLink]="[ '/secretary-history' ]" routerLinkActive="active">
+              <fa-icon icon="history"></fa-icon> &nbsp; Διαχείριση Μαθημάτων - Βιβλίων
+            </a>
+            <a class="navbar-item" target="_blank" href="../../../assets/secretary.pdf">
+              <fa-icon icon="question-circle"></fa-icon> &nbsp; Βοήθεια
+            </a>
+          </div>
+        </div>
+
+        <div class="navbar-item has-dropdown is-hoverable has-shadow" *ngIf="!authService.isAuthenticated()">
+          <a class="navbar-link">
+            <fa-icon icon="book"></fa-icon> &nbsp; Εκδότες
+
+          </a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" routerLink="/profile" routerLinkActive="is-active">
+              <fa-icon icon="screwdriver"></fa-icon> &nbsp; To be constructed...
+            </a>
+          </div>
+        </div>
+
+        <div class="navbar-item has-dropdown is-hoverable has-shadow" *ngIf="!authService.isAuthenticated()">
+          <a class="navbar-link">
+            <fa-icon icon="book-open"></fa-icon> &nbsp; Βιβλιοθήκες
+          </a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" routerLink="/profile" routerLinkActive="is-active">
+              <fa-icon icon="screwdriver"></fa-icon> &nbsp; To be constructed...
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="navbar-end">
+
+        <div class="navbar-item has-dropdown is-hoverable has-shadow" *ngIf="authService.isAuthenticated()">
+          <a class="navbar-link">
+            <fa-icon icon="user"></fa-icon> &nbsp; {{ authService.getFirstName() }} {{ authService.getLastName()}}
+          </a>
+          <div class="navbar-dropdown is-boxed is-right">
+            <a class="navbar-item" routerLinkActive="is-active" [routerLink]="[ '/profile' ]">
+              <fa-icon icon="user-circle"></fa-icon> &nbsp; Προφίλ
+            </a>
+            <hr class="navbar-divider">
+            <a class="navbar-item" (click)="authService.logout()">
+              <fa-icon icon="sign-out-alt"></fa-icon> &nbsp; Αποσύνδεση
+            </a>
+          </div>
+
+        </div>
+
+        <a class="navbar-item" [routerLink]="[ '/register' ]" routerLinkActive="active" *ngIf="!authService.isAuthenticated()">
+          <fa-icon icon="user-alt"></fa-icon> &nbsp; Εγγραφή
+        </a>
+
+        <a class="navbar-item" [routerLink]="[ '/login' ]" routerLinkActive="active" *ngIf="!authService.isAuthenticated()">
+          <fa-icon icon="sign-in-alt"></fa-icon> &nbsp; Είσοδος
+        </a>
+
+      </div>
+
+    </div>
+  </div>
+</nav>

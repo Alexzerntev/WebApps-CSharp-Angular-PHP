@@ -1,0 +1,28 @@
+<div class="table-container">
+  <table class="table is-fullwidth is-hoverable">
+    <thead>
+      <tr>
+        <th>Date - Time</th>
+        <th>Lattitude (deg)</th>
+        <th>Longtitude (deg)</th>
+        <th>Current Speed (km/h)</th>
+        <th>Average Speed (km/h)</th>
+        <th>Max Speed (km/h)</th>
+        <th>Speed Accuracy</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let gps of gpses | paginate: { itemsPerPage: 5, currentPage: page }; let i = index;">
+        <td>{{gps.DateTime | date: 'dd/MM/yyyy - HH:mm:ss'}}</td>
+        <td>{{gps.Lattitude}}</td>
+        <td>{{gps.Longtitude}}</td>
+        <td>{{gps.CurrentSpeed}}</td>
+        <td>{{gps.AverageSpeed}}</td>
+        <td>{{gps.MaxSpeed}}</td>
+        <td>{{gps.SpeedAccuracy}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<pagination (onPageChange)="onPageChange($event)"></pagination>

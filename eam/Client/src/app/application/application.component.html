@@ -1,0 +1,368 @@
+<div class="steps is-large">
+  <div class="step-item is-active is-success">
+    <div class="step-marker">1</div>
+    <div class="step-details">
+      <p class="step-title">Δημιουργία</p>
+    </div>
+  </div>
+  <div [ngClass]="{'step-item': true, 'is-active is-success': step == 1}">
+    <div class="step-marker">
+      <fa-icon icon="flag"></fa-icon>
+    </div>
+    <div class="step-details">
+      <p class="step-title">Προεπισκόπηση</p>
+    </div>
+  </div>
+
+  <br>
+  <br>
+  <br>
+  <br>
+
+  <div class="steps-actions">
+    <div class="steps-action" *ngIf="step==1">
+      <a (click)="setStep(0)" class="button is-light">
+        <fa-icon icon="arrow-left"></fa-icon> &nbsp;Πίσω
+      </a>
+    </div>
+    <div class="steps-action" *ngIf="step==0">
+      <a (click)="setStep(1)" class="button is-light"> Επόμενο &nbsp; <fa-icon icon="arrow-right"></fa-icon></a>
+    </div>
+    <div class="steps-action" *ngIf="step==1">
+      <button class="button is-link" [disabled]="chosenIds.length == 0" (click)="print()">
+        <fa-icon icon="print"></fa-icon> &nbsp; Εκτύπωση
+      </button>
+    </div>
+    <div class="steps-action" *ngIf="step==1">
+      <button class="button is-success" [disabled]="chosenIds.length == 0" (click)="addApplication()">
+        <fa-icon icon="flag-checkered"></fa-icon> &nbsp;Oλοκλήρωση
+      </button>
+    </div>
+  </div>
+
+  <div class="steps-content">
+
+    <div [ngClass]="{'step-content has-text-centered is-active': step == 0, 'step-content has-text-centered ': step == 1}">
+
+      <section class="accordions">
+
+        <article [ngClass]="{'accordion': true, 'is-active ': tog[0] == true}">
+          <div class="accordion-header toggle" (click)="toggle(0)">
+            <p>1ο Έτος</p>
+          </div>
+          <div class="accordion-body">
+            <div class="accordion-content">
+
+              <section class="accordions">
+
+                <article class="accordion is-active">
+                  <div class="accordion-header toggle">
+                    <p>'Α Εξαμηνο</p>
+                  </div>
+                  <div class="accordion-body">
+                    <div class="accordion-content">
+
+                      <table class="table is-fullwidth is-hoverable toggle">
+                        <tbody>
+                          <tr *ngFor="let lesson of lessons" (click)="openModal(lesson)">
+                            <td *ngIf="lesson.year == 1 && lesson.semester == 0">{{lesson.title}} &nbsp; <fa-icon icon="check" *ngIf="checkIfChosenLesson(lesson.id)"></fa-icon></td>
+                          </tr>
+                        </tbody>
+                      </table>
+
+                    </div>
+                  </div>
+                </article>
+
+                <br>
+
+                <article class="accordion is-active">
+                  <div class="accordion-header toggle">
+                    <p>'Β Εξαμηνο</p>
+                  </div>
+                  <div class="accordion-body">
+                    <div class="accordion-content">
+
+                      <table class="table is-fullwidth is-hoverable toggle">
+                        <tbody>
+                          <tr *ngFor="let lesson of lessons" (click)="openModal(lesson)">
+                            <td *ngIf="lesson.year == 1 && lesson.semester == 1">{{lesson.title}}  &nbsp; <fa-icon icon="check" *ngIf="checkIfChosenLesson(lesson.id)"></fa-icon></td>
+                          </tr>
+                        </tbody>
+                      </table>
+
+                    </div>
+                  </div>
+                </article>
+
+              </section>
+
+            </div>
+          </div>
+        </article>
+
+        <br>
+
+        <article [ngClass]="{'accordion': true, 'is-active ': tog[1] == true}">
+
+          <div class="accordion-header toggle" (click)="toggle(1)">
+            <p>2ο Έτος</p>
+          </div>
+          <div class="accordion-body">
+            <div class="accordion-content">
+
+              <section class="accordions">
+                <article class="accordion is-active">
+                  <div class="accordion-header toggle">
+                    <p>'Α Εξαμηνο</p>
+                  </div>
+                  <div class="accordion-body">
+                    <div class="accordion-content">
+
+                      <table class="table is-fullwidth is-hoverable toggle">
+                        <tbody>
+                          <tr *ngFor="let lesson of lessons" (click)="openModal(lesson)">
+                            <td *ngIf="lesson.year == 2 && lesson.semester == 0">{{lesson.title}} &nbsp; <fa-icon icon="check" *ngIf="checkIfChosenLesson(lesson.id)"></fa-icon></td>
+                          </tr>
+                        </tbody>
+                      </table>
+
+                    </div>
+                  </div>
+                </article>
+
+                <br>
+
+                <article class="accordion is-active">
+                  <div class="accordion-header toggle">
+                    <p>'Β Εξαμηνο</p>
+                  </div>
+                  <div class="accordion-body">
+                    <div class="accordion-content">
+
+                      <table class="table is-fullwidth is-hoverable toggle">
+                        <tbody>
+                          <tr *ngFor="let lesson of lessons" (click)="openModal(lesson)">
+                            <td *ngIf="lesson.year == 2 && lesson.semester == 1">{{lesson.title}} &nbsp; <fa-icon icon="check" *ngIf="checkIfChosenLesson(lesson.id)"></fa-icon></td>
+                          </tr>
+                        </tbody>
+                      </table>
+
+                    </div>
+                  </div>
+                </article>
+
+              </section>
+
+            </div>
+          </div>
+
+        </article>
+
+        <br>
+
+        <article [ngClass]="{'accordion': true, 'is-active ': tog[2] == true}">
+
+          <div class="accordion-header toggle" (click)="toggle(2)">
+            <p>3ο Έτος</p>
+          </div>
+          <div class="accordion-body">
+            <div class="accordion-content">
+
+              <section class="accordions">
+                <article class="accordion is-active">
+                  <div class="accordion-header toggle">
+                    <p>'Α Εξαμηνο</p>
+                  </div>
+                  <div class="accordion-body">
+                    <div class="accordion-content">
+
+                      <table class="table is-fullwidth is-hoverable toggle">
+                        <tbody>
+                          <tr *ngFor="let lesson of lessons" (click)="openModal(lesson)">
+                            <td *ngIf="lesson.year == 3 && lesson.semester == 0">{{lesson.title}} &nbsp; <fa-icon icon="check" *ngIf="checkIfChosenLesson(lesson.id)"></fa-icon></td>
+                          </tr>
+                        </tbody>
+                      </table>
+
+                    </div>
+                  </div>
+                </article>
+
+                <br>
+
+                <article class="accordion is-active">
+                  <div class="accordion-header toggle">
+                    <p>'Β Εξαμηνο</p>
+                  </div>
+                  <div class="accordion-body">
+                    <div class="accordion-content">
+
+                      <table class="table is-fullwidth is-hoverable toggle">
+                        <tbody>
+                          <tr *ngFor="let lesson of lessons" (click)="openModal(lesson)">
+                            <td *ngIf="lesson.year == 3 && lesson.semester == 1">{{lesson.title}} &nbsp; <fa-icon icon="check" *ngIf="checkIfChosenLesson(lesson.id)"></fa-icon></td>
+                          </tr>
+                        </tbody>
+                      </table>
+
+                    </div>
+                  </div>
+                </article>
+
+              </section>
+
+            </div>
+          </div>
+
+        </article>
+
+        <br>
+
+        <article [ngClass]="{'accordion': true, 'is-active ': tog[3] == true}">
+
+          <div class="accordion-header toggle" (click)="toggle(3)">
+            <p>4ο Έτος</p>
+          </div>
+          <div class="accordion-body">
+            <div class="accordion-content">
+
+              <section class="accordions">
+                <article class="accordion is-active">
+                  <div class="accordion-header toggle">
+                    <p>'Α Εξαμηνο</p>
+                  </div>
+                  <div class="accordion-body">
+                    <div class="accordion-content">
+
+                      <table class="table is-fullwidth is-hoverable toggle">
+                        <tbody>
+                          <tr *ngFor="let lesson of lessons" (click)="openModal(lesson)">
+                            <td *ngIf="lesson.year == 4 && lesson.semester == 0">{{lesson.title}} &nbsp; <fa-icon icon="check" *ngIf="checkIfChosenLesson(lesson.id)"></fa-icon></td>
+                          </tr>
+                        </tbody>
+                      </table>
+
+                    </div>
+                  </div>
+                </article>
+
+                <br>
+
+                <article class="accordion is-active">
+                  <div class="accordion-header toggle">
+                    <p>'Β Εξαμηνο</p>
+                  </div>
+                  <div class="accordion-body">
+                    <div class="accordion-content">
+
+                      <table class="table is-fullwidth is-hoverable toggle">
+                        <tbody>
+                          <tr *ngFor="let lesson of lessons" (click)="openModal(lesson)">
+                            <td *ngIf="lesson.year == 4 && lesson.semester == 1">{{lesson.title}} &nbsp; <fa-icon icon="check" *ngIf="checkIfChosenLesson(lesson.id)"></fa-icon></td>
+                          </tr>
+                        </tbody>
+                      </table>
+
+                    </div>
+                  </div>
+                </article>
+
+              </section>
+
+            </div>
+          </div>
+
+        </article>
+
+      </section>
+
+    </div>
+
+    <div [ngClass]="{'step-content has-text-centered is-active': step == 1, 'step-content has-text-centered ': step == 0}">
+      <div id="print-section">
+
+        <div class="columns">
+          <div class="column is-offset-5" *ngIf="chosenIds.length == 0">
+            <h1 class="title is-5 is-text-centered">Δεν έχετε επιλέξει συγγράμματα</h1>
+          </div>
+          <div class="column">
+
+            <div *ngFor="let book of chosenBooks;let idx = index">
+              <div class=" card">
+                <h2 style="padding: 20px" class="title is-4">{{book.title}}</h2>
+                <h2 style="padding: 20px" class="subtitle is-5"><strong>Συγγραφέας:</strong> {{book.author}}</h2>
+                <h2 style="padding: 20px" class="subtitle is-5"><strong>Περιγραφή:</strong> {{book.description}}</h2>
+                <h2 style="padding: 20px" class="subtitle is-5"><strong>ISBN:</strong> {{book.isbn}}</h2>
+
+                <h2 style="padding: 20px" class="title is-4">{{book.name}}</h2>
+                <h2 style="padding: 20px" class="subtitle is-5"><strong>Διεύθυνση:</strong> {{book.address}}</h2>
+                <h2 style="padding: 20px" class="subtitle is-5"><strong>Τηλέφωνο:</strong> {{book.phone_number}}</h2>
+                <h2 style="padding: 20px" class="subtitle is-5"><strong>E-mail:</strong> {{book.email}}</h2>
+
+                <iframe width="600" height="500" style="margin:30px" [src]="sanitizer.bypassSecurityTrustResourceUrl(book.map_link)"
+                  allowfullscreen>
+                </iframe>
+
+                <p>&nbsp;</p>
+              </div>
+              <br>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+</div>
+
+
+<div class="modal" [ngClass]="{'is-active': modal != 'closed'}">
+  <div class="modal-background"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <p class="modal-card-title">{{modalTitle}}</p>
+      <button class="delete" aria-label="close" (click)="modal = 'closed'"></button>
+    </header>
+    <section class="modal-card-body">
+      <!-- Content ... -->
+      <div class="columns">
+        <div class="column">
+
+          <div *ngFor="let book of chosenLesson.books;let idx = index">
+            <div class=" card">
+              <h2 style="padding: 20px" class="title is-4">{{book.title}}</h2>
+              <h2 style="padding: 20px" class="subtitle is-5"><strong>Συγγραφέας:</strong> {{book.author}}</h2>
+              <h2 style="padding: 20px" class="subtitle is-5"><strong>Περιγραφή:</strong> {{book.description}}</h2>
+              <h2 style="padding: 20px" class="subtitle is-5"><strong>ISBN:</strong> {{book.isbn}}</h2>
+              <div style="padding: 20px" class="buttons">
+                <button class="button is-primary" *ngIf="!checkIfChosen(book.id)" (click)="chooseBook(book.id, chosenLesson.id)"
+                  [disabled]="hasChosen == true && !checkIfChosen(book.id)">
+                  <fa-icon icon="check"></fa-icon> &nbsp;Επιλογή
+                </button>
+                <button class="button is-warning" *ngIf="checkIfChosen(book.id)" (click)="unchooseBook(book.id, chosenLesson.id)">
+                  <fa-icon icon="undo"></fa-icon> &nbsp;Ακύρωση
+                </button>
+                <button class="button is-link">
+                  <fa-icon icon="search"></fa-icon> &nbsp; Ενδεικτικό απόσπασμα και Περιεχομενα
+                </button>
+              </div>
+              <p>&nbsp;</p>
+            </div>
+            <br>
+          </div>
+
+        </div>
+      </div>
+    </section>
+    <footer class="modal-card-foot">
+      <button class="button is-success" (click)="modal = 'closed'">
+        <fa-icon icon="save"></fa-icon>
+        &nbsp;Αποθήκευση
+      </button>
+    </footer>
+  </div>
+</div>

@@ -1,0 +1,68 @@
+value 0. 
+reset cause   ($0,reset_cause,date_time)
+
+* reset_cause (int HEX, 0-F)
+
+* date_time (string)
+  ddmmyyhhmmss
+  day month year hour minute second
+  Παράδειγμα: 280518212620 = 28/05/2018 21:26:20
+
+
+
+------------------------------------------------------------------------------------------
+value 1. 
+connection attributes   ($1,device_id,quality_of_service)
+
+* device_id (string, 20 chars max)
+
+* quality_of_service (int 0-F)
+
+
+
+------------------------------------------------------------------------------------------
+value 2. 
+GPS   ($2,date_time,lat,lon,current_speed,average_speed,max_speed,speed_accuracy)
+
+* date_time (string)
+  ddmmyyhhmmss
+  day.month.year.hour.minute.second
+  Παράδειγμα: 280518212620 = 28/05/2018 21:26:20
+
+* Latitude (string)
+  μοίρες και λεπτά. (dddmm.mmmmm)
+
+* Longitude (string)
+  μοίρες και λεπτά. (dddmm.mmmmm)
+
+* current_speed (float DEC με 1 δεδαδικό, 0 - 999.9)
+  km/h
+
+* average_speed (float DEC με 1 δεδαδικό, 0 - 999.9)
+  km/h
+
+* max_speed (float DEC με 1 δεδαδικό, 0 - 999.9)
+  km/h
+
+* speed_accuracy (int DEC HEX, 0-FFFF)
+
+
+
+------------------------------------------------------------------------------------------
+value 3.
+hardware status   ($3,date_time,main_power,battery,mcu_temp,move,signal1,signal2,signal3,signal4,signal5,signal6,signal7,signal8)
+
+* main_power (int HEX, 0-FFFF)
+
+* internal_battery (int HEX, 0-FFFF)
+
+* mcu_temp (int HEX, 0-FFFF)
+
+* accelerometer_move (bool, 0-1)
+
+* signal1 - signal8 (int HEX, 0-FFFF)
+
+
+------------------------------------------------------------------------------------------
+examples:
+$0,0,280518212620$1,mydevice,0$2,280518212620,37.981079,23.761422,5,4,10,200$3,280518212620,2500,3500,1400,1,0,0,0,0,0,0,0,0

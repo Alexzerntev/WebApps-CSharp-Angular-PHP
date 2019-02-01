@@ -1,0 +1,14 @@
+.container{
+    max-height: 700px;
+    min-height: 700px;
+    height: 700px;
+    overflow-y:auto;
+}
+
+.full-height{
+    max-height: 50%;
+}
+
+.unacknoledged{
+    background-color:rgba(0,0,0,0.1);
+}

@@ -1,0 +1,45 @@
+
+<!-- Form register -->
+<div class="row justify-content-center marginTop10">
+<div class="col-4 align-center ">
+<form>
+    <p class="h5 text-center mb-4">Εγγραφή Νέου Χρήστη</p>
+
+    <div class="md-form">
+        <i class="fa fa-user prefix grey-text"></i>
+        <input  mdbActive type="text" id="orangeForm-name"  name="orangeForm-name" class="form-control" required autofocus [(ngModel)]="registerData.LastName">
+        <label for="orangeForm-name">Επώνυμο</label>
+    </div>
+    <div class="md-form">
+        <i class="fa fa-user prefix grey-text"></i>
+        <input  mdbActive type="text" id="orangeForm-name" name="orangeForm-name" class="form-control"required autofocus [(ngModel)]="registerData.FirstName">
+        <label for="orangeForm-name">Όνομα</label>
+    </div>
+    <div class="md-form">
+        <i class="fa fa-envelope prefix grey-text"></i>
+        <input mdbActive type="text" id="orangeForm-email"  name="orangeForm-email"class="form-control" required autofocus [(ngModel)]="registerData.Email">
+        <label for="orangeForm-email">E-mail</label>
+    </div>
+
+    <div class="md-form">
+        <i class="fa fa-lock prefix grey-text"></i>
+        <input mdbActive type="password" id="orangeForm-pass" name="orangeForm-pass" class="form-control" required [(ngModel)]="registerData.Password">
+        <label for="orangeForm-pass">Κωδικός Πρόσβασης</label>
+    </div>
+
+    <div class="md-form">
+        <i class="fa fa-lock prefix grey-text"></i>
+        <input mdbActive type="password" id="orangeForm-pass" name="orangeForm-pass" class="form-control" required [(ngModel)]="repeatPassword">
+        <label for="orangeForm-pass">Επανάληψη Κωδικού Πρόσβασης</label>
+    </div>
+
+    <div class="text-center">
+        <button class="btn btn-primary" (click)="validate()">Εγγραφή</button>
+    </div>
+
+</form>
+</div>
+</div>
+
+<!-- Form register -->
+                

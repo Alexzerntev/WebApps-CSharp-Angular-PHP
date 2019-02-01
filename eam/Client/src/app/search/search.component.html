@@ -1,0 +1,120 @@
+<div class="columns">
+  <div class="column is-offset-1">
+    <h1 class="title is-4">
+      Αναζήτηση βιβλίων
+    </h1>
+    <h1 class="subtitle is-5">
+      Πλοηγηθείτε στα Διαθέσιμα βιβλία
+    </h1>
+  </div>
+</div>
+
+<div class="columns">
+  <div class="column is-offset-5">
+    <figure class="image is-128x128">
+      <img src="../../assets//navbarlogo.png">
+    </figure>
+  </div>
+</div>
+
+<br>
+
+<div class="columns" (keypress)="onSubmit($event)">
+  <div class="column is-offset-1">
+
+    <div class="field has-addons">
+      <div class="control is-expanded">
+        <input class="input" type="text" placeholder="Αναζήτηση" [(ngModel)]="searchString">
+      </div>
+      <div class="control">
+        <a class="button is-info" (click)="search()">
+          <fa-icon icon="search"></fa-icon> &nbsp; Αναζήτηση
+        </a>
+      </div>
+    </div>
+
+  </div>
+  <div class="column is-1">
+  </div>
+</div>
+
+<div class="columns" *ngIf="resultCount != undefined">
+  <div class="column is-offset-1">
+    <h1 class="title is-4">Βρέθηκαν {{resultCount}} αποτελέσματα</h1>
+  </div>
+  <div class="column is-1">
+  </div>
+</div>
+
+
+
+<table class="table is-fullwidth is-hoverable" *ngIf="books.length != 0">
+  <thead>
+    <tr>
+      <th>Τίτλος</th>
+      <th>Συγγραφέας</th>
+      <th>ISBN</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let b of books | paginate: { itemsPerPage: 5, currentPage: page };" (click)="openModal(b)" style="cursor: pointer;">
+      <td>{{b.title}}</td>
+      <td>{{b.author}}</td>
+      <td>{{b.isbn}}</td>
+    </tr>
+  </tbody>
+</table>
+
+<pagination *ngIf="books.length > 0" (onPageChange)="onPageChange($event)"></pagination>
+
+
+
+<div class="modal" [ngClass]="{'is-active': modal != 'closed'}">
+  <div class="modal-background"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <p class="modal-card-title">{{book.title}}</p>
+      <button class="delete" aria-label="close" (click)="modal = 'closed'"></button>
+    </header>
+    <section class="modal-card-body">
+      <!-- Content ... -->
+      <div class="columns">
+        <div class="column">
+
+          <div>
+            <div class=" card">
+              <h2 style="padding: 20px" class="title is-4">{{book.title}}</h2>
+              <h2 style="padding: 20px" class="subtitle is-5"><strong>Συγγραφέας:</strong> {{book.author}}</h2>
+              <h2 style="padding: 20px" class="subtitle is-5"><strong>Περιγραφή:</strong> {{book.description}}</h2>
+              <h2 style="padding: 20px" class="subtitle is-5"><strong>ISBN:</strong> {{book.isbn}}</h2>
+
+              <h2 style="padding: 20px" class="title is-4">{{book.name}}</h2>
+              <h2 style="padding: 20px" class="subtitle is-5"><strong>Διεύθυνση:</strong> {{book.address}}</h2>
+              <h2 style="padding: 20px" class="subtitle is-5"><strong>Τηλέφωνο:</strong> {{book.phone_number}}</h2>
+              <h2 style="padding: 20px" class="subtitle is-5"><strong>E-mail:</strong> {{book.email}}</h2>
+
+              <iframe *ngIf="modal != 'closed';" width="400" height="350" style="margin:30px" [src]="sanitizer.bypassSecurityTrustResourceUrl(book.map_link)"
+                allowfullscreen>
+              </iframe>
+
+              <div style="padding: 20px" class="buttons">
+                <button class="button is-link">
+                  <fa-icon icon="search"></fa-icon> &nbsp; Ενδεικτικό απόσπασμα και Περιεχομενα
+                </button>
+              </div>
+              <p>&nbsp;</p>
+            </div>
+            <br>
+          </div>
+
+        </div>
+      </div>
+    </section>
+    <footer class="modal-card-foot">
+      <button class="button is-success" (click)="modal = 'closed'">
+        <fa-icon icon="check"></fa-icon>
+        &nbsp;OK
+      </button>
+    </footer>
+  </div>
+</div>

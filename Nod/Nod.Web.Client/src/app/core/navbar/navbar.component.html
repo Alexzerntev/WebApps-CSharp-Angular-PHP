@@ -1,0 +1,47 @@
+<nav class="navbar is-info">
+  <div class="container">
+    <div class="navbar-brand">
+      <a class="navbar-item" routerLink="/home">
+        <img src="assets/navbarlogo.png" alt="Nod Logo">
+      </a>
+      <div class="navbar-burger burger" (click)="burgerOpen = !burgerOpen" [ngClass]="{'is-active': burgerOpen}" data-target="nod-nav-menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+
+    <div id="nod-nav-menu" class="navbar-menu"  [ngClass]="{'is-active': burgerOpen}">
+
+      <div class="navbar-start">
+        <a class="navbar-item" routerLink="/dashboard" *ngIf="authService.isAuthenticated()">
+          <fa-icon icon="tachometer-alt"></fa-icon> &nbsp; Dashboard
+        </a>
+      </div>
+
+      <div class="navbar-end">
+
+        <div class="navbar-item has-dropdown is-hoverable has-shadow" *ngIf="authService.isAuthenticated()">
+          <a class="navbar-link">
+            <fa-icon icon="user"></fa-icon> &nbsp; {{ authService.fullName }}
+          </a>
+          <div class="navbar-dropdown is-boxed is-right">
+            <a class="navbar-item">
+              <fa-icon icon="cog"></fa-icon> &nbsp;Settings
+            </a>
+            <hr class="navbar-divider">
+            <a class="navbar-item" (click)="authService.logout()">
+              <fa-icon icon="sign-out-alt"></fa-icon> &nbsp; Log out
+            </a>
+          </div>
+        </div>
+
+        <a class="navbar-item" routerLink="/login" *ngIf="!authService.isAuthenticated()">
+          Log In &nbsp;
+          <fa-icon icon="sign-in-alt"></fa-icon>
+        </a>
+
+      </div>
+    </div>
+  </div>
+</nav>

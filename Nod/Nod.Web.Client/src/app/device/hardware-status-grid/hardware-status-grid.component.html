@@ -1,0 +1,25 @@
+<div class="table-container">
+  <table class="table is-fullwidth is-hoverable">
+    <thead>
+      <tr>
+        <th>Date - Time</th>
+        <th>Main Power</th>
+        <th>Battery</th>
+        <th>Mcu Temperature</th>
+        <th>Is Moving</th>
+        <!-- <th>Signals</th> -->
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let status of hardwareStatuses | paginate: { itemsPerPage: 5, currentPage: page }; let i = index;">
+        <td>{{status.DateTime | date: 'dd/MM/yyyy - HH:mm:ss'}}</td>
+        <td>{{status.MainPower}}</td>
+        <td>{{status.Battery}}</td>
+        <td>{{status.McuTemperature}}</td>
+        <td>{{status.IsMoving}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<pagination (onPageChange)="onPageChange($event)"></pagination>

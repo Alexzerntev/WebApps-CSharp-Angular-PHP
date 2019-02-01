@@ -1,0 +1,35 @@
+<div class="col-lg-8 col-md-7">
+  <div class="card">
+    <div class="card-header" data-background-color="red">
+      <h4 class="title">Spins List
+        <button class="btn btn-white btn-round btn-just-icon pull-right" type="submit" (click)="reload()">
+          <i class="material-icons">refresh</i>
+          <div class="ripple-container"></div>
+        </button>
+      </h4>
+      <p class="category">Info for user spin </p>
+    </div>
+    <div class="card-content table-responsive"style="max-height:300px;overflow-x:hidden;overflow-y:scroll;">
+      <table class="table">
+        <thead class="text-danger">
+          <tr>            
+            <th>Played Amount</th>
+            <th>Win</th>
+            <th>Total Amount</th>
+            <th>Time</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let spin of spinList">
+            <td>{{spin.PlayedAmount}}</td>
+            <td>{{spin.Win}}</td>
+            <td>{{spin.TotalAmount}}</td>
+            <td>{{spin.TimeStamp | date: "dd/MM/yyyy"}}</td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+
+</div>

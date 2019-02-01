@@ -1,0 +1,128 @@
+<div class="columns">
+
+  <div class="column">
+    <div class="field">
+
+      <label class="label">Όνομα</label>
+      <div class="control has-icons-left has-icons-right">
+        <input class="input" type="text" [value]="authService.getFirstName()" placeholder="Όνομα" disabled>
+        <span class="icon is-small is-left">
+          <fa-icon icon="user"></fa-icon>
+        </span>
+      </div>
+
+    </div>
+    <div class="field">
+
+      <label class="label">Επόνυμο</label>
+      <div class="control has-icons-left has-icons-right">
+        <input class="input" [value]="authService.getLastName()" type="text" placeholder="Last Name" disabled>
+        <span class="icon is-small is-left">
+          <fa-icon icon="user"></fa-icon>
+        </span>
+      </div>
+
+    </div>
+
+    <div class="field">
+
+      <label class="label">E-mail</label>
+      <div class="control has-icons-left has-icons-right">
+        <input class="input" [value]="authService.getEmail()" type="text" placeholder="E-mail" disabled>
+        <span class="icon is-small is-left">
+          <fa-icon icon="envelope"></fa-icon>
+        </span>
+      </div>
+
+    </div>
+
+    <div class="field">
+
+      <label class="label">Τηλέφωνο</label>
+      <div class="control has-icons-left has-icons-right">
+        <input class="input" [value]="authService.getPhoneNumber()" type="text" placeholder="Phone Number" [disabled]="!canEdit">
+        <span class="icon is-small is-left">
+          <fa-icon icon="phone"></fa-icon>
+        </span>
+      </div>
+
+    </div>
+
+    <div class="field" *ngIf="!isChangingPassword && canEdit">
+
+      <label class="label">Κωδικός</label>
+      <div class="control has-icons-left has-icons-right">
+        <input class="input" [(ngModel)]="pass" type="text" placeholder="Κωδικός" [disabled]="!canEdit">
+        <span class="icon is-small is-left">
+          <fa-icon icon="lock"></fa-icon>
+        </span>
+      </div>
+
+    </div>
+
+
+    <br>
+    <div class="field">
+      <div class="buttons">
+        <button *ngIf="!canEdit" class="button is-link" (click)="canEdit = !canEdit">
+          <fa-icon icon="edit"></fa-icon>
+          &nbsp; Επεξεργασία Λογαριασμού
+        </button>
+        <button *ngIf="canEdit" class="button is-success" (click)="validate()">
+          <fa-icon icon="save"></fa-icon> &nbsp;
+          Αποθήκευση
+        </button>
+        <button *ngIf="!isChangingPassword" class="button is-info" (click)="isChangingPassword = true;">
+          <fa-icon icon="key"></fa-icon>
+          &nbsp; Αλλαγή Κώδικού
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="columns" *ngIf="isChangingPassword">
+  <div class="column">
+    <div class="field">
+
+      <label class="label">Παλιός Κωδικός</label>
+      <div class="control has-icons-left has-icons-right">
+        <input class="input" type="password" [(ngModel)]="changePassword.OldPassword" placeholder="Παλιός Κωδικός">
+        <span class="icon is-small is-left">
+          <fa-icon icon="key"></fa-icon>
+        </span>
+      </div>
+
+    </div>
+    <div class="field">
+
+      <label class="label">Νέος Κωδικός</label>
+      <div class="control has-icons-left has-icons-right">
+        <input class="input" [(ngModel)]="changePassword.NewPassword" type="password" placeholder="Νέος Κωδικός">
+        <span class="icon is-small is-left">
+          <fa-icon icon="key"></fa-icon>
+        </span>
+      </div>
+
+    </div>
+
+    <div class="field">
+
+      <label class="label">Επιβεβαίωση Νέου Κωδικόυ</label>
+      <div class="control has-icons-left has-icons-right">
+        <input class="input" [(ngModel)]="confirmPassword" type="password" placeholder="Επιβεβαίωση Νέου Κωδικόυ">
+        <span class="icon is-small is-left">
+          <fa-icon icon="key"></fa-icon>
+        </span>
+      </div>
+
+    </div>
+
+    <br>
+    <div class="field">
+      <button class="button is-success" (click)="validate()">
+        <fa-icon icon="save"></fa-icon> &nbsp; Αλλαγή
+      </button>
+    </div>
+  </div>
+</div>
