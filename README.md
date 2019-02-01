@@ -22,7 +22,8 @@
 *   Database: MongoDB With Repository pattern in backend
 *   Frontend: Angular, bulma, TypeScript, HTML5
 *   Authentication: JWT
-####   Tcp Listener to collect data from IoT devices via tcp protocol and custom data transaction protocol
+
+*   Tcp Listener to collect data from IoT devices via tcp protocol and custom data transaction protocol
 
 
 ## TED
