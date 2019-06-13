@@ -20,7 +20,7 @@
 ### Gps tracking, and sensors data outpout application (IoT)
 *   Backend: .Net Core - 5 Layers architecture (API, BLL, DAL, CLIENT, MODEL)
 *   Database: MongoDB With Repository pattern in backend
-*   Frontend: Angular, bulma, TypeScript, HTML5
+*   Frontend: Angular, bulma, TypeScript, HTML5, OpenMaps for gps trace representation
 *   Authentication: JWT
 
 *   Tcp Listener to collect data from IoT devices via tcp protocol and custom data transaction protocol
@@ -28,6 +28,7 @@
 
 ## TED
 ### LinkedIn alike project
+*   Using K-nn algorithm for job and friends recomendation
 *   Backend: .Net Core - 5 Layers architecture (API, BLL, DAL, CLIENT, MODEL)
 *   Database: MSSQL
 *   Frontend: Angular, bulma, TypeScript, HTML5
