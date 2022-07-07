@@ -31,7 +31,7 @@
     "chartist": "0.11.0",
     "core-js": "^2.4.1",
     "file-loader": "^1.1.5",
-    "moment": "2.18.1",
+    "moment": "2.29.4",
     "node-sass": "^4.5.3",
     "rxjs": "^5.5.2",
     "webpack": "^3.1.0",
